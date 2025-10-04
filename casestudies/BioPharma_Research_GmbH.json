@@ -1,0 +1,12 @@
+{
+  "title": "Pharmaceutical Research Cloud Acceleration",
+  "client_industry": "Pharma",
+  "client_name": "BioPharma Research GmbH",
+  "client_url": "https://www.biopharma-research.de",
+  "challenge": "Drug discovery workloads were bottlenecked by legacy compute infrastructure.",
+  "solution": "Evasion Tech moved research workloads to AWS HPC clusters and optimized workflows with container orchestration.",
+  "detailed_solution": "Evasion Tech collaborated with researchers to analyze simulation workflows and optimize them for HPC clusters. AWS ParallelCluster was leveraged to handle high-performance compute demands. Containerized workloads improved reproducibility and reduced setup times. Data pipelines were automated to accelerate dataset preparation. Visualization tools were integrated to allow near real-time insights. The overall setup drastically reduced experimentation timelines, giving researchers an edge in competitive drug discovery.",
+  "outcome": "Cut simulation times by 65%.",
+  "time_to_impact": "4 months",
+  "long_term_impact": "Accelerated time-to-market for new drugs by nearly 1 year."
+}

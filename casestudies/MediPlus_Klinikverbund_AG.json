@@ -1,0 +1,12 @@
+{
+  "title": "Healthcare Data Compliance in Hybrid Cloud",
+  "client_industry": "Healthcare",
+  "client_name": "MediPlus Klinikverbund AG",
+  "client_url": "https://www.mediplus-klinik.de",
+  "challenge": "The client needed to comply with GDPR and industry-specific regulations while modernizing their IT infrastructure.",
+  "solution": "Evasion Tech implemented a hybrid cloud with AWS for workloads and a private cloud for sensitive patient data.",
+  "detailed_solution": "Evasion Tech began by analyzing patient data flows and identifying regulatory bottlenecks. Sensitive data was isolated into a private cloud environment with strict access controls, while less sensitive workloads were moved to AWS for agility. Data encryption was applied at rest and in transit. Automated compliance checks and audit-ready reporting were integrated into the platform. Secure APIs ensured interoperability across systems, supporting modern digital healthcare services. The result was a hybrid cloud setup that balanced innovation with regulatory compliance.",
+  "outcome": "Compliance achieved while reducing operational overhead.",
+  "time_to_impact": "4 months",
+  "long_term_impact": "Created a compliant foundation for future AI-driven patient analytics."
+}

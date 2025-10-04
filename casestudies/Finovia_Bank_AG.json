@@ -1,0 +1,12 @@
+{
+  "title": "Financial Services Cloud Cost Optimization",
+  "client_industry": "Finance",
+  "client_name": "Finovia Bank AG",
+  "client_url": "https://www.finovia-bank.de",
+  "challenge": "A mid-sized bank faced skyrocketing AWS bills due to underutilized resources.",
+  "solution": "Evasion Tech performed a FinOps assessment and applied rightsizing, reserved instances, and containerization.",
+  "detailed_solution": "Evasion Tech implemented a FinOps framework tailored to the bank\u2019s IT and compliance requirements. A cost analysis dashboard was created to track spend across workloads. Underutilized resources were consolidated, and reserved instances were purchased for predictable workloads. Container orchestration reduced compute waste, while automated policies ensured idle resources were shut down. Training sessions were conducted for the internal IT team to adopt cost governance best practices. These combined efforts resulted in sustainable cloud cost savings.",
+  "outcome": "Cloud spend reduced by 35% without performance loss.",
+  "time_to_impact": "3 months",
+  "long_term_impact": "Built internal FinOps capability for continuous optimization."
+}

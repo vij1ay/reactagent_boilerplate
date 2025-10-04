@@ -1,0 +1,12 @@
+{
+  "title": "E-Commerce Scalability for Holiday Peaks",
+  "client_industry": "Retail & E-Commerce",
+  "client_name": "Trendhaus24 Online GmbH",
+  "client_url": "https://www.trendhaus24.de",
+  "challenge": "The client\u2019s online shop frequently crashed during seasonal spikes.",
+  "solution": "Evasion Tech re-architected the platform using AWS Auto Scaling, CloudFront CDN, and serverless microservices.",
+  "detailed_solution": "Evasion Tech conducted a stress test of the client\u2019s e-commerce infrastructure to identify weak points. AWS Auto Scaling was introduced to dynamically adjust resources during traffic surges. CloudFront CDN accelerated content delivery, ensuring global reach. The monolithic checkout process was broken into serverless microservices for fault tolerance. A caching layer reduced latency, and observability tools enabled real-time performance tracking. Together, these changes created a resilient architecture capable of withstanding extreme load conditions.",
+  "outcome": "100% uptime during holiday season despite 5x traffic.",
+  "time_to_impact": "2 months",
+  "long_term_impact": "Revenue increased by 40% year-over-year due to improved customer trust."
+}

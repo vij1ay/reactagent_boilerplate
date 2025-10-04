@@ -1,0 +1,336 @@
+[
+  {
+    "specialist_id": "ps-417",
+    "name": "Vijay",
+    "title": "Solution Generalist",
+    "role": "Professional Services",
+    "email": "vijay@envasiontech.example",
+    "slack": "@vijay",
+    "timezone": "Asia/Kolkata",
+    "languages": ["en", "hi", "de"],
+    "regions_supported": ["IN", "SG", "AE"],
+    "clouds": ["AWS", "GCP"],
+    "products": ["BigQuery", "Pub/Sub", "Cloud Run", "AWS S3", "AWS Glue", "Redshift"],
+    "skills": ["Data pipelines", "ETL", "Streaming", "Serverless integration"],
+    "integrations": ["Snowflake", "Workday", "ServiceNow"],
+    "industries": ["Finance", "Telecom"],
+    "compliance": ["ISO27001", "SOC2"],
+    "certifications": [
+      {"provider": "Google", "name": "Professional Data Engineer", "level": "Professional", "year": 2023},
+      {"provider": "AWS", "name": "Big Data Specialty", "level": "Specialty", "year": 2022}
+    ],
+    "experience": [
+      {
+        "summary": "Built cross-region real-time data replication pipeline with Pub/Sub and Dataflow",
+        "tags": ["Finance", "GCP", "Streaming"],
+        "year": 2023
+      },
+      {
+        "summary": "Optimized telecom analytics warehouse migration from Oracle to Redshift",
+        "tags": ["Telecom", "AWS", "Redshift"],
+        "year": 2022
+      }
+    ],
+    "constraints": ["No long-term on-site travel"],
+    "seniority": "Mid-Senior",
+    "workload_pct": 65,
+    "availability": "Available in 3–5 business days",
+    "is_active": true,
+    "last_touch": "2025-09-15"
+  },
+  {
+    "specialist_id": "ps-301",
+    "name": "Elena Novak",
+    "title": "Senior Solutions Architect",
+    "role": "PreSales",
+    "email": "elena.novak@envasiontech.example",
+    "slack": "@elena",
+    "timezone": "Europe/Prague",
+    "languages": ["en", "cs", "de"],
+    "regions_supported": ["CZ", "DE", "AT", "PL"],
+    "clouds": ["AWS", "Azure"],
+    "products": ["API Management", "Azure App Service", "Azure Functions", "AWS Lambda", "API Gateway", "EventBridge"],
+    "skills": ["API strategy", "Event-driven", "Strangler pattern", "Zero Trust"],
+    "integrations": ["Okta", "SAP", "Salesforce"],
+    "industries": ["Retail", "Pharma"],
+    "compliance": ["GDPR"],
+    "certifications": [
+      {"provider":"Microsoft","name":"AZ-305","level":"Expert","year":2024},
+      {"provider":"AWS","name":"Solutions Architect","level":"Associate","year":2023}
+    ],
+    "experience": [
+      {"summary":"Retail checkout hardening with APIM + Functions canary releases","tags":["Retail","Azure","APIM"],"year":2024}
+    ],
+    "constraints": ["No on-prem mainframe integrations"],
+    "seniority": "Senior",
+    "workload_pct": 55,
+    "availability": "Within 24–48 hours",
+    "is_active": true,
+    "last_touch": "2025-09-10"
+  },
+  {
+    "specialist_id": "ps-302",
+    "name": "Rohan Iyer",
+    "title": "Principal Solutions Architect",
+    "role": "PreSales",
+    "email": "rohan.iyer@envasiontech.example",
+    "slack": "@rohan",
+    "timezone": "Europe/London",
+    "languages": ["en"],
+    "regions_supported": ["UK", "IE", "SE", "NO", "DK"],
+    "clouds": ["AWS"],
+    "products": ["ECS Fargate", "EKS", "RDS Aurora", "DynamoDB", "SQS", "Step Functions"],
+    "skills": ["Microservices", "Platform engineering", "GitOps", "FinOps"],
+    "integrations": ["Kubernetes", "HashiCorp Vault", "Okta"],
+    "industries": ["Financial Services", "Insurance"],
+    "compliance": ["ISO27001", "SOC2", "PCI"],
+    "certifications": [
+      {"provider":"AWS","name":"Solutions Architect","level":"Professional","year":2022},
+      {"provider":"CNCF","name":"CKA","level":"Pro","year":2023}
+    ],
+    "experience": [
+      {"summary":"PCI-aligned card vault migration to Aurora with GitOps EKS platform","tags":["FinServ","AWS","PCI"],"year":2024}
+    ],
+    "constraints": ["No crypto-currency custody design"],
+    "seniority": "Principal",
+    "workload_pct": 70,
+    "availability": "Next week after Tue",
+    "is_active": true,
+    "last_touch": "2025-09-12"
+  },
+  {
+    "specialist_id": "ps-303",
+    "name": "Sofia Almeida",
+    "title": "PreSales Engineer",
+    "role": "PreSales",
+    "email": "sofia.almeida@envasiontech.example",
+    "slack": "@sofia",
+    "timezone": "Europe/Lisbon",
+    "languages": ["pt", "en", "es"],
+    "regions_supported": ["PT", "ES", "BR"],
+    "clouds": ["Azure", "M365"],
+    "products": ["Microsoft 365", "Power Platform", "Defender for Cloud", "Intune", "Entra ID"],
+    "skills": ["Zero Trust", "DLP", "Power Apps governance", "Adoption & change"],
+    "integrations": ["SharePoint", "ServiceNow", "Jira"],
+    "industries": ["Public Sector", "Healthcare"],
+    "compliance": ["GDPR", "HIPAA"],
+    "certifications": [
+      {"provider":"Microsoft","name":"SC-100","level":"Expert","year":2023},
+      {"provider":"Microsoft","name":"PL-200","level":"Associate","year":2024}
+    ],
+    "experience": [
+      {"summary":"M365 zero-trust rollout with CA/MFA and Power Platform CoE","tags":["Public","M365","Security"],"year":2024}
+    ],
+    "constraints": ["No custom mobile SDK builds"],
+    "seniority": "Senior",
+    "workload_pct": 45,
+    "availability": "Within 72 hours",
+    "is_active": true,
+    "last_touch": "2025-09-08"
+  },
+  {
+    "specialist_id": "ps-304",
+    "name": "Jonas Berg",
+    "title": "Solutions Architect",
+    "role": "PreSales",
+    "email": "jonas.berg@envasiontech.example",
+    "slack": "@jonas",
+    "timezone": "Europe/Stockholm",
+    "languages": ["sv", "en"],
+    "regions_supported": ["SE", "FI", "NO"],
+    "clouds": ["AWS", "Azure"],
+    "products": ["Kinesis", "Timestream", "IoT Core", "Event Hubs", "ADLS Gen2"],
+    "skills": ["IoT telemetry", "Time-series", "Edge to cloud"],
+    "integrations": ["Siemens S7", "OPC-UA"],
+    "industries": ["Manufacturing", "Energy"],
+    "compliance": ["ISO27001", "GDPR"],
+    "certifications": [
+      {"provider":"AWS","name":"Data Analytics Specialty","level":"Specialty","year":2024}
+    ],
+    "experience": [
+      {"summary":"OEE dashboards from PLC data using Kinesis→S3→Athena","tags":["Manufacturing","IoT","AWS"],"year":2023}
+    ],
+    "constraints": ["No custom hardware design"],
+    "seniority": "Mid",
+    "workload_pct": 50,
+    "availability": "Mon–Thu afternoons CET",
+    "is_active": true,
+    "last_touch": "2025-09-14"
+  },
+  {
+    "specialist_id": "ps-305",
+    "name": "Amira Haddad",
+    "title": "Security Solutions Architect",
+    "role": "PreSales",
+    "email": "amira.haddad@envasiontech.example",
+    "slack": "@amira",
+    "timezone": "Europe/Paris",
+    "languages": ["fr", "en", "ar"],
+    "regions_supported": ["FR", "BE", "LU", "MA"],
+    "clouds": ["Azure", "M365"],
+    "products": ["Sentinel", "Defender for Cloud", "Key Vault", "Policy", "Purview"],
+    "skills": ["SIEM/SOAR", "Compliance evidencing", "Data governance"],
+    "integrations": ["Splunk", "Okta", "ServiceNow"],
+    "industries": ["Financial Services", "Public Sector"],
+    "compliance": ["GDPR", "SOC2"],
+    "certifications": [
+      {"provider":"Microsoft","name":"SC-200","level":"Associate","year":2024},
+      {"provider":"ISC2","name":"CISSP","level":"Pro","year":2021}
+    ],
+    "experience": [
+      {"summary":"Bank SOC modernization with Sentinel and automated playbooks","tags":["FinServ","Security","Azure"],"year":2024}
+    ],
+    "constraints": ["No red-team engagements"],
+    "seniority": "Senior",
+    "workload_pct": 60,
+    "availability": "Within 48 hours",
+    "is_active": true,
+    "last_touch": "2025-09-11"
+  },
+  {
+    "specialist_id": "ps-306",
+    "name": "Mateusz Kowalski",
+    "title": "Data & AI Architect",
+    "role": "PreSales",
+    "email": "mateusz.kowalski@envasiontech.example",
+    "slack": "@mateusz",
+    "timezone": "Europe/Warsaw",
+    "languages": ["pl", "en"],
+    "regions_supported": ["PL", "DE", "CZ"],
+    "clouds": ["Azure"],
+    "products": ["Databricks", "Synapse", "AI Search", "Azure OpenAI", "Purview"],
+    "skills": ["Lakehouse", "RAG", "Data quality", "Lineage"],
+    "integrations": ["SAP BW/4HANA", "SharePoint"],
+    "industries": ["Pharma", "Retail"],
+    "compliance": ["GxP", "GDPR"],
+    "certifications": [
+      {"provider":"Databricks","name":"Data Engineer Professional","level":"Pro","year":2024}
+    ],
+    "experience": [
+      {"summary":"GxP-aware RAG assistant with Purview lineage & evidence packs","tags":["Pharma","RAG","Azure"],"year":2025}
+    ],
+    "constraints": ["No non-EU data residency for PII"],
+    "seniority": "Senior",
+    "workload_pct": 35,
+    "availability": "Same week",
+    "is_active": true,
+    "last_touch": "2025-09-15"
+  },
+  {
+    "specialist_id": "ps-307",
+    "name": "Greta Rossi",
+    "title": "Solutions Architect",
+    "role": "PreSales",
+    "email": "greta.rossi@envasiontech.example",
+    "slack": "@greta",
+    "timezone": "Europe/Rome",
+    "languages": ["it", "en"],
+    "regions_supported": ["IT", "CH"],
+    "clouds": ["AWS"],
+    "products": ["CloudFront", "S3 Static Websites", "OpenSearch", "Cognito", "CodePipeline"],
+    "skills": ["Headless CMS", "Edge delivery", "Search"],
+    "integrations": ["Contentful", "Shopify", "Adobe"],
+    "industries": ["Media", "eCommerce"],
+    "compliance": ["GDPR"],
+    "certifications": [
+      {"provider":"AWS","name":"Developer Associate","level":"Associate","year":2023}
+    ],
+    "experience": [
+      {"summary":"Media portal with S3+CloudFront and search on OpenSearch","tags":["Media","Edge","AWS"],"year":2024}
+    ],
+    "constraints": ["No custom video encoding pipelines"],
+    "seniority": "Mid",
+    "workload_pct": 40,
+    "availability": "Within 3 business days",
+    "is_active": true,
+    "last_touch": "2025-09-09"
+  },
+  {
+    "specialist_id": "ps-308",
+    "name": "Nikolai Petrov",
+    "title": "Solutions Architect (Platform)",
+    "role": "PreSales",
+    "email": "nikolai.petrov@envasiontech.example",
+    "slack": "@nikolai",
+    "timezone": "Europe/Sofia",
+    "languages": ["bg", "en", "ru"],
+    "regions_supported": ["BG", "RO", "GR"],
+    "clouds": ["Azure", "AWS"],
+    "products": ["AKS", "Container Apps", "EKS", "ArgoCD/Flux", "KEDA"],
+    "skills": ["Kubernetes", "GitOps", "SRE"],
+    "integrations": ["HashiCorp Terraform", "Vault", "Grafana"],
+    "industries": ["Gaming", "SaaS"],
+    "compliance": ["ISO27001"],
+    "certifications": [
+      {"provider":"CNCF","name":"CKA","level":"Pro","year":2022},
+      {"provider":"Microsoft","name":"AZ-400","level":"Expert","year":2024}
+    ],
+    "experience": [
+      {"summary":"GitOps platform with AKS + Flux and SLO-based autoscaling","tags":["SaaS","AKS","GitOps"],"year":2025}
+    ],
+    "constraints": ["No on-prem OpenShift migrations"],
+    "seniority": "Senior",
+    "workload_pct": 50,
+    "availability": "M/W/F afternoons",
+    "is_active": true,
+    "last_touch": "2025-09-16"
+  },
+  {
+    "specialist_id": "ps-309",
+    "name": "Layla Karim",
+    "title": "Solutions Architect (Integration)",
+    "role": "PreSales",
+    "email": "layla.karim@envasiontech.example",
+    "slack": "@layla",
+    "timezone": "Europe/Berlin",
+    "languages": ["de", "en"],
+    "regions_supported": ["DE", "AT", "CH", "NL"],
+    "clouds": ["Azure"],
+    "products": ["API Management", "Logic Apps", "Service Bus", "Event Grid"],
+    "skills": ["System integration", "B2B/B2C APIs", "Idempotency"],
+    "integrations": ["SAP", "Dynamics 365", "Salesforce"],
+    "industries": ["Automotive", "Logistics"],
+    "compliance": ["GDPR"],
+    "certifications": [
+      {"provider":"Microsoft","name":"AZ-204","level":"Associate","year":2023}
+    ],
+    "experience": [
+      {"summary":"Automotive B2B API hub with APIM + Service Bus contracts","tags":["Automotive","Integration","Azure"],"year":2024}
+    ],
+    "constraints": ["No custom mobile SDKs"],
+    "seniority": "Senior",
+    "workload_pct": 30,
+    "availability": "Next business day",
+    "is_active": true,
+    "last_touch": "2025-09-13"
+  },
+  {
+    "specialist_id": "ps-310",
+    "name": "Diego Fernández",
+    "title": "PreSales Engineer (Data)",
+    "role": "PreSales",
+    "email": "diego.fernandez@envasiontech.example",
+    "slack": "@diego",
+    "timezone": "Europe/Madrid",
+    "languages": ["es", "en"],
+    "regions_supported": ["ES", "PT", "FR"],
+    "clouds": ["AWS", "Azure"],
+    "products": ["Glue", "Athena", "QuickSight", "Synapse Serverless", "Power BI"],
+    "skills": ["ELT pipelines", "Data modeling", "Cost optimization"],
+    "integrations": ["Snowflake", "BigQuery (federation)"],
+    "industries": ["eCommerce", "Travel"],
+    "compliance": ["GDPR"],
+    "certifications": [
+      {"provider":"AWS","name":"Data Analytics Specialty","level":"Specialty","year":2023}
+    ],
+    "experience": [
+      {"summary":"Marketplace analytics lake with Glue+Athena and PBI embed","tags":["eComm","Analytics","Hybrid"],"year":2025}
+    ],
+    "constraints": ["No on-prem Hadoop migrations"],
+    "seniority": "Mid",
+    "workload_pct": 50,
+    "availability": "Within 2–3 days",
+    "is_active": true,
+    "last_touch": "2025-09-10"
+  }
+]

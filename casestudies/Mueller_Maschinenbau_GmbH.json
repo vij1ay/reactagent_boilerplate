@@ -1,0 +1,12 @@
+{
+  "title": "Legacy ERP Migration to Azure",
+  "client_industry": "Manufacturing",
+  "client_name": "M\u00fcller Maschinenbau GmbH",
+  "client_url": "https://www.mueller-maschinenbau.de",
+  "challenge": "A German manufacturing company struggled with an aging on-prem ERP system that was costly and inflexible.",
+  "solution": "Evasion Tech designed a migration strategy to Microsoft Azure, leveraging Azure SQL, Kubernetes, and cloud-native monitoring.",
+  "detailed_solution": "Evasion Tech first performed an in-depth assessment of the legacy ERP, identifying dependencies and high-risk modules. A phased migration plan was created to minimize downtime. Using Azure SQL for structured data and Kubernetes for containerized services, the ERP was modernized into a scalable architecture. Cloud-native monitoring and alerting were implemented to ensure proactive maintenance. DevOps pipelines automated deployments and versioning, reducing human errors. The final solution offered resilience, scalability, and future-readiness.",
+  "outcome": "Seamless migration with <3% downtime, improved scalability for seasonal workloads, and integrated DevOps pipelines.",
+  "time_to_impact": "6 months",
+  "long_term_impact": "Reduced IT costs by 28% annually and enabled new digital sales channels integrated into ERP."
+}

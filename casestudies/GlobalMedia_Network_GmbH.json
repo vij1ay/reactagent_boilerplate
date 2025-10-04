@@ -1,0 +1,12 @@
+{
+  "title": "Cloud-Native App Development for Collaboration",
+  "client_industry": "Media",
+  "client_name": "GlobalMedia Network GmbH",
+  "client_url": "https://www.globalmedia-network.de",
+  "challenge": "Client\u2019s editorial teams needed real-time collaboration across geographies.",
+  "solution": "Evasion Tech developed a cloud-native collaboration tool using GCP, Firebase, and React.",
+  "detailed_solution": "Evasion Tech worked closely with editorial teams to understand bottlenecks in content creation. A collaboration platform was built using GCP\u2019s real-time database and Firebase for synchronization. React provided a modern front-end with seamless user experience. The system supported version control, concurrent editing, and automated publishing workflows. Security features such as role-based access were integrated to protect sensitive content. The final solution empowered distributed teams to work as if co-located.",
+  "outcome": "Reduced content production time by 30%.",
+  "time_to_impact": "5 months",
+  "long_term_impact": "Improved global editorial efficiency and faster news delivery."
+}

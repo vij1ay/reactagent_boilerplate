@@ -1,0 +1,12 @@
+{
+  "title": "Business Continuity for Logistics Firm",
+  "client_industry": "Logistics",
+  "client_name": "TransLogistik GmbH",
+  "client_url": "https://www.translogistik.de",
+  "challenge": "A logistics provider lacked disaster recovery for mission-critical applications.",
+  "solution": "Evasion Tech implemented geo-redundant backups and automated failover using Azure Site Recovery.",
+  "detailed_solution": "Evasion Tech performed a risk assessment on the client\u2019s logistics systems and identified critical apps requiring protection. Azure Site Recovery was configured with geo-redundant backups. Automated failover policies were created to ensure rapid recovery in case of outages. Monitoring dashboards were deployed for real-time visibility. Training was provided to IT staff on failover drills. The implementation ensured logistics operations could continue without disruption, even in disaster scenarios.",
+  "outcome": "Achieved RTO of <15 minutes and RPO of <5 minutes.",
+  "time_to_impact": "3 months",
+  "long_term_impact": "Guaranteed uninterrupted logistics operations and customer SLAs."
+}

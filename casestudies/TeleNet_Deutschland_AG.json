@@ -1,0 +1,12 @@
+{
+  "title": "Cybersecurity Modernization for Telecom",
+  "client_industry": "Telecommunications",
+  "client_name": "TeleNet Deutschland AG",
+  "client_url": "https://www.telenet-deutschland.de",
+  "challenge": "Telecom operator required modern security posture for 5G infrastructure rollout.",
+  "solution": "Evasion Tech deployed zero-trust architecture using Microsoft Defender, Azure Sentinel, and identity-based controls.",
+  "detailed_solution": "Evasion Tech assessed the client\u2019s 5G infrastructure roadmap and identified vulnerabilities. A zero-trust framework was applied across users, devices, and applications. Microsoft Defender provided endpoint protection, while Azure Sentinel centralized threat detection. Identity-based access control ensured secure multi-tenant operations. Continuous monitoring and automated remediation improved resilience. The new security model enabled the telecom operator to roll out 5G services confidently.",
+  "outcome": "Closed 85% of identified vulnerabilities within the first quarter.",
+  "time_to_impact": "3 months",
+  "long_term_impact": "Created a scalable, secure foundation for 5G expansion."
+}

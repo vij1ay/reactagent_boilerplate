@@ -1,0 +1,12 @@
+{
+  "title": "IoT Data Lake Implementation",
+  "client_industry": "Automotive",
+  "client_name": "AutoConnect AG",
+  "client_url": "https://www.autoconnect.de",
+  "challenge": "Client lacked the ability to process and analyze sensor data from connected vehicles.",
+  "solution": "Evasion Tech created a data lake using AWS S3, Glue, and Redshift, paired with real-time analytics pipelines.",
+  "detailed_solution": "Evasion Tech started with designing a scalable architecture for ingesting billions of IoT signals daily. AWS S3 served as the data lake backbone, while Glue performed ETL transformations. Redshift enabled advanced analytics on structured datasets. A Kafka-based streaming pipeline was implemented for real-time event processing. Secure APIs provided insights back to vehicle dashboards and partner applications. The project unlocked new opportunities in predictive maintenance and driver assistance systems.",
+  "outcome": "Enabled predictive maintenance and enhanced driver safety features.",
+  "time_to_impact": "6 months",
+  "long_term_impact": "Generated a new revenue stream from data-driven services."
+}

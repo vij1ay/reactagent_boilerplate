@@ -1,0 +1,12 @@
+{
+  "title": "Public Sector Digital Transformation",
+  "client_industry": "Government",
+  "client_name": "Stadtverwaltung K\u00f6ln",
+  "client_url": "https://www.stadt-koeln.de",
+  "challenge": "A German city government sought to digitize citizen services but had siloed IT systems.",
+  "solution": "Evasion Tech unified systems into a cloud-native portal powered by Azure and Office 365 integration.",
+  "detailed_solution": "Evasion Tech performed a digital readiness assessment across departments, identifying integration gaps. A centralized citizen portal was developed on Azure, with Office 365 tools integrated for staff collaboration. Legacy document workflows were digitized using automated forms and secure document storage. Identity management ensured secure citizen logins, and APIs connected back-end systems. Agile methods allowed incremental rollout of services, ensuring quick wins. The transformation built the foundation for a more connected and efficient administration.",
+  "outcome": "Launched 15+ digital citizen services with secure access.",
+  "time_to_impact": "9 months",
+  "long_term_impact": "Increased citizen satisfaction and reduced paper-based processes by 70%."
+}

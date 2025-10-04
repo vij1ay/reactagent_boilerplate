@@ -1,0 +1,12 @@
+*.pyc
+*.backup
+*.bak
+.DS_Store
+*.env
+backup
+chroma
+chromastore
+logs
+.venv
+.history
+__pycache__
