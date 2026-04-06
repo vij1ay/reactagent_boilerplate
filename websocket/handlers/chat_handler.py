@@ -17,6 +17,9 @@ from utils import (
     get_redis_instance,
     safe_jsondumps,
 )
+from guardrails.input_guardrail import classify_input, GuardrailViolation
+from guardrails.output_guardrail import validate_output, safety_check_output, SAFE_FALLBACK_MESSAGE
+from guardrails.logger import log_guardrail_violation
 
 ws_manager = WebSocketManager()
 conversation_mgr = ConversationManager()
@@ -301,21 +304,26 @@ async def _process_graph_stream(
                     try:
                         messages = session.get("messages", [])
                         logger.info(
-                            f"Session has {len(messages)} messages for thread naming"
+                            f"Session has {len(messages)} messages to check thread naming"
                         )
-                        user_message = ""
-                        for msg in messages:
-                            if msg.get("role") == "human":
-                                user_message = msg.get("content", "")
-                                break
+                        user_messages = [ msg for msg in messages if msg.get("role") == "human" ]
+                        logger.info(f"Found {len(user_messages)} user messages in session for thread naming")
+                        # for msg in messages:
+                        #     if msg.get("role") == "human":
+                        #         user_message = msg.get("content", "")
+                        #         break
 
-                        if user_message and final_content_to_save:
+                        if user_messages and len(user_messages) > 2 and final_content_to_save:
+                            user_message_texts = [
+                                m.get("content", "") if isinstance(m, dict) else str(m)
+                                for m in user_messages
+                            ]
                             logger.info(
-                                f"Generating name for thread {thread_id} - User message: {user_message[:30]}..."
+                                f"Generating name for thread {thread_id} - User message: {', '.join(user_message_texts)[:100]}..."
                             )
                             generated_name = (
                                 await conversation_mgr.generate_thread_name(
-                                    user_message=user_message,
+                                    user_message="\n".join(user_message_texts),
                                     ai_message=final_content_to_save,
                                 )
                             )
@@ -368,7 +376,7 @@ async def _process_graph_stream(
                 elif not any(
                     msg.get("role") == "ai" for msg in session["messages"][1:]
                 ):
-                    fallback_response = "I'm sorry, I wasn't able to generate a response. How else can I help you with your travel plans?"
+                    fallback_response = "I'm sorry, I wasn't able to generate a response. How else can I help you with our services?"
                     logger.warning(f"No AI content generated, adding fallback response to session cache.")
                     conversation_mgr.add_message(
                         thread_id, {"role": "ai", "content": fallback_response}
@@ -376,6 +384,17 @@ async def _process_graph_stream(
                     final_content_to_save = fallback_response
 
                 if final_content_to_save:
+                    # --- Output Guardrail ---
+                    safe_content = validate_output(final_content_to_save)
+                    safety_result = safety_check_output(safe_content)
+                    if not safety_result.is_safe:
+                        log_guardrail_violation(
+                            "OUTPUT", safety_result.reason, safe_content, thread_id
+                        )
+                        safe_content = SAFE_FALLBACK_MESSAGE
+                    final_content_to_save = safe_content
+                    # --- End Output Guardrail ---
+
                     response_message = {
                         "type": "agent_response",
                         "content": final_content_to_save,
@@ -428,9 +447,10 @@ async def _process_graph_stream(
                 },
             )
         except Exception as ws_err:
+            print ("ws_err>>", ws_err)
             logger.error(f"Failed to send error to WebSocket: {ws_err}")
 
-        fallback_response = "I apologize, but I encountered an error while processing your request. How else can I help you with your travel plans?"
+        fallback_response = "I apologize, but I encountered an error while processing your request. How else can I help you with our services?"
         session = conversation_mgr.get_session(thread_id)
         if session:
             if "messages" not in session:
@@ -548,6 +568,32 @@ async def handle(fastapi_app: FastAPI, thread_id: str, user_id: str, user_input:
         else:
             user_query = ""
         if user_query:
+            # --- Input Guardrail ---
+            try:
+                classify_input(user_query)
+            except GuardrailViolation as gv:
+                log_guardrail_violation("INPUT", gv.reason, user_query, thread_id)
+                await ws_manager.send_message(
+                    thread_id,
+                    {
+                        "type": "agent_response",
+                        "content": "I'm unable to process that request. Please ask me about cloud migration, modernization, or our services.",
+                        "agent": "planner",
+                        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                    },
+                )
+                await ws_manager.send_message(
+                    thread_id,
+                    {
+                        "type": "completed",
+                        "thread_id": thread_id,
+                        "agent": "planner",
+                        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                    },
+                )
+                return
+            # --- End Input Guardrail ---
+
             current_time = datetime.datetime.now(datetime.timezone.utc)
             message_id = str(uuid4())
             user_message = {

@@ -8,7 +8,7 @@ from typing import List
 import pandas as pd
 
 from langchain_core.tools import tool
-from langchain.schema import HumanMessage, SystemMessage, AIMessage
+from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 from langchain_core.runnables import ensure_config
 
 from llm_utils import get_custom_llm
@@ -96,10 +96,12 @@ def get_specialist_availability(search_query: str) -> dict:
         f"Tool Call: get_specialist_availability - thread: {thread_id}, search_query: {search_query}")
     try:
         specialist_data = llm_specialist_search(search_query, specialists_data)
-        # specialist_data = random.choice(specialists_data)
-        if "matched_specialist" in specialist_data:
+        # Normalise to a single dict — LLM may return a list, a wrapped dict, or a plain dict
+        if isinstance(specialist_data, list):
+            specialist_data = specialist_data[0] if specialist_data else {}
+        if isinstance(specialist_data, dict) and "matched_specialist" in specialist_data:
             specialist_data = specialist_data["matched_specialist"]
-        if not specialist_data:
+        if not specialist_data or not isinstance(specialist_data, dict):
             specialist_data = specialists_data[0]
         return {
             "success": True,

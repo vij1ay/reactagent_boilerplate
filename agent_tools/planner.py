@@ -3,8 +3,8 @@ from typing import Annotated, Dict, List, Any, Literal, Optional
 from typing_extensions import TypedDict
 
 from langchain.chat_models import init_chat_model
+from langchain.agents import create_agent
 from langchain_core.messages import AnyMessage
-from langgraph.prebuilt import create_react_agent
 from langgraph.graph.message import add_messages
 
 from pydantic import BaseModel, Field, SecretStr
@@ -28,6 +28,7 @@ from prompts.planner_prompts import PLANNER_SYSTEM_PROMPT, PLANNER_OUTPUT_INSTRU
 from app_logger import logger
 from llm_utils import environment, get_llm
 from utils import get_current_datetime_str
+from guardrails.tool_guardrail import guardrail_tool
 
 # The following commented classes are for future schema expansion and structured responses.
 # They are left here intentionally for reference and documentation purposes.
@@ -69,18 +70,18 @@ from utils import get_current_datetime_str
 #     messages: Annotated[List[AnyMessage], add_messages]
 
 
-# Add all available tools here
+# Add all available tools here — each wrapped with the tool guardrail
 tools = [
-    case_studies_tool,
-    testimonials_tool,
-    onboard_customer,
-    summarize_conversation,
-    get_specialist_availability,
-    book_appointment,
-    check_appointment_availability,
-    store_conversation_data,
-    get_conversation_data,
-    clear_conversation_data,
+    guardrail_tool(case_studies_tool),
+    guardrail_tool(testimonials_tool),
+    guardrail_tool(onboard_customer),
+    guardrail_tool(summarize_conversation),
+    guardrail_tool(get_specialist_availability),
+    guardrail_tool(book_appointment),
+    guardrail_tool(check_appointment_availability),
+    guardrail_tool(store_conversation_data),
+    guardrail_tool(get_conversation_data),
+    guardrail_tool(clear_conversation_data),
 ]
 
 
@@ -101,10 +102,10 @@ def create_planner_graph(checkpointer=None):
 
     model = get_llm()
 
-    planner_graph = create_react_agent(
+    planner_graph = create_agent(
         model,
         tools=tools,
-        prompt=PLANNER_SYSTEM_PROMPT,  # Main system prompt for ReAct loop
+        system_prompt=PLANNER_SYSTEM_PROMPT,
         # response_format=response_format_config  # Tuple for customized final structured output call
         checkpointer=checkpointer,
     )

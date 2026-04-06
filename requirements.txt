@@ -1,13 +1,35 @@
-pandas
-chromadb
-fastapi
-uvicorn
-python-dotenv
-langgraph
-langchain
-langchain-google-genai
-langchain-openai
-langchain-community
-langchain-ollama
-langchain_chroma
-langgraph-checkpoint-redis
+# Core web framework
+fastapi==0.135.3
+uvicorn==0.44.0
+websockets==16.0
+
+# LangChain / LangGraph
+langchain==1.2.15
+langchain-core==1.2.26
+langchain-community==0.4.1
+langchain-openai==1.1.12
+langchain-google-genai==4.2.1
+langchain-ollama==1.0.1
+langchain-chroma==1.1.0
+langchain-text-splitters==1.1.1
+
+# LangGraph + checkpointers
+langgraph==1.1.6
+langgraph-prebuilt==1.0.9
+langgraph-checkpoint==4.0.1
+langgraph-checkpoint-redis==0.4.0
+langgraph-checkpoint-sqlite==3.0.3
+aiosqlite==0.22.1
+
+# Vector store
+chromadb==1.5.5
+
+# Redis
+redis==7.4.0
+
+# Data
+pandas==3.0.2
+
+# Utilities
+python-dotenv==1.2.2
+pydantic==2.12.5

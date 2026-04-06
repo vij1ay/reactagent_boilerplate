@@ -134,4 +134,4 @@ def get_redis_async_instance():
     redis_host = environment.get("REDIS_HOST", "localhost")
     redis_port = int(environment.get("REDIS_PORT", 6379))
     redis_password = environment.get("REDIS_PASSWORD", None)
-    return AsyncRedis(host=redis_host, port=redis_port, password=redis_password, db=1)
+    return AsyncRedis(host=redis_host, port=redis_port, password=redis_password, db=0)
