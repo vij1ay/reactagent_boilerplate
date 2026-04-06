@@ -60,15 +60,21 @@ class WebSocketManager:
         Args:
             thread_id (str): Thread ID for the connection.
         """
+        conn = self.active_connections.pop(thread_id, None)
+        if conn is None:
+            return
         try:
-            if thread_id in self.active_connections:
-                # Remove from local connections
-                conn = self.active_connections.pop(thread_id, None)
-                await conn["sock"].close(code=1000)
-                del conn
-                logger.info(f"WebSocket disconnected for thread ID {thread_id}")
+            from starlette.websockets import WebSocketState
+            sock = conn["sock"]
+            if sock.client_state != WebSocketState.DISCONNECTED:
+                await sock.close(code=1000)
+        except RuntimeError as e:
+            # Socket already closed by the client — not an error worth logging
+            logger.debug(f"WebSocket for {thread_id} already closed: {e}")
         except Exception as e:
             logger.error(f"Error disconnecting WebSocket: {str(e)}")
+        else:
+            logger.info(f"WebSocket disconnected for thread ID {thread_id}")
 
     async def send_message(self, thread_id: str, message: Dict[str, Any]) -> bool:
         """

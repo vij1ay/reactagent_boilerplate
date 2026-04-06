@@ -1,4 +1,5 @@
 # main.py
+import asyncio
 import json
 import uvicorn
 import websocket
@@ -8,6 +9,7 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from langgraph.checkpoint.redis.aio import AsyncRedisSaver
+from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from langgraph.checkpoint.memory import MemorySaver
 from contextlib import asynccontextmanager
 
@@ -16,33 +18,63 @@ from agent_tools.planner import create_planner_graph
 from utils import get_redis_instance, get_redis_async_instance, environment
 from config import COMPANY_NAME, CHATBOT_NAME, COMPANY_MOTO
 
+_REDIS_CONNECT_TIMEOUT = 5  # seconds before falling back to SQLite
+_SQLITE_DB_PATH = environment.get("CHECKPOINT_DB_PATH", "checkpoints.db")
 
 redis_client = get_redis_instance()
+
+
+async def _make_sqlite_checkpointer():
+    """Create and return a ready-to-use AsyncSqliteSaver."""
+    checkpointer = await AsyncSqliteSaver.from_conn_string(_SQLITE_DB_PATH)
+    logger.info(f"SQLite Checkpointer initialized — db: {_SQLITE_DB_PATH}")
+    return checkpointer
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
     Lifespan context manager for FastAPI application.
-    Initializes Redis checkpointer if enabled, otherwise falls back to memory saver.
-    Sets up the planner graph and handles cleanup on shutdown.
+
+    Checkpointer priority:
+      1. AsyncRedisSaver  — when REDIS_HOST is set and RedisStack is available
+      2. AsyncSqliteSaver — persistent fallback (survives restarts)
+      3. MemorySaver      — in-memory last resort
     """
+    async_redis_cli = None
+    checkpointer = None
+
     if environment.get("REDIS_HOST", ""):
         try:
             async_redis_cli = get_redis_async_instance()
             checkpointer = AsyncRedisSaver(redis_client=async_redis_cli)
-            await checkpointer.asetup()
-        except Exception as e:
-            logger.error(f"Failed to initialize Redis Checkpointer: {str(e)}")
-            checkpointer = None
+            await asyncio.wait_for(checkpointer.asetup(), timeout=_REDIS_CONNECT_TIMEOUT)
+            logger.info("Redis Checkpointer initialized.")
+        except asyncio.TimeoutError:
+            logger.warning(
+                f"Redis connection timed out after {_REDIS_CONNECT_TIMEOUT}s. "
+                "Falling back to SQLite checkpointer."
+            )
             if async_redis_cli:
                 await async_redis_cli.aclose()
                 async_redis_cli = None
-            logger.info("Redis Checkpointing Errored. Using MemorySaver.")
-            checkpointer = MemorySaver()  # type: ignore
+            checkpointer = await _make_sqlite_checkpointer()
+        except Exception as e:
+            err_str = str(e)
+            if "FT._LIST" in err_str or "unknown command" in err_str.lower():
+                logger.warning(
+                    "Redis lacks the RediSearch module (needs RedisStack). "
+                    "Falling back to SQLite checkpointer."
+                )
+            else:
+                logger.error(f"Failed to initialize Redis Checkpointer: {err_str}")
+            if async_redis_cli:
+                await async_redis_cli.aclose()
+                async_redis_cli = None
+            checkpointer = await _make_sqlite_checkpointer()
     else:
-        logger.info("Redis Checkpointing is disabled. Using MemorySaver.")
-        checkpointer = MemorySaver()  # type: ignore
+        logger.info("Redis disabled. Using SQLite checkpointer.")
+        checkpointer = await _make_sqlite_checkpointer()
 
     app.state.planner_graph = create_planner_graph(checkpointer=checkpointer)
     logger.info("Planner graph initialized")

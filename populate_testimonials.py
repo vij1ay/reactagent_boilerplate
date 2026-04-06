@@ -18,8 +18,8 @@ import os
 import shutil
 import logging
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.schema.document import Document
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_core.documents import Document
 from langchain_chroma import Chroma
 
 from llm_utils import get_embedding_function

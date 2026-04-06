@@ -3,7 +3,7 @@ import ast
 import json
 
 from langchain_core.tools import tool
-from langchain.schema import SystemMessage
+from langchain_core.messages import SystemMessage
 from langchain_core.runnables import ensure_config
 
 from conversations.thread_manager import ConversationManager

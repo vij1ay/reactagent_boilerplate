@@ -3,9 +3,33 @@ import json
 from threading import Lock
 from typing import Dict, List, Any
 
+from langchain_core.messages import HumanMessage, SystemMessage
+
+from app_logger import logger
 from utils import get_redis_instance, safe_jsondumps
 
 redis_client = get_redis_instance()
+
+
+def _extract_text(content: Any) -> str:
+    """
+    Normalise LLM content to a plain string.
+
+    Azure OpenAI (and some other providers) may return content as a list of
+    content-block dicts, e.g. [{"type": "text", "text": "..."}].
+    This helper flattens any such structure into a single string.
+    """
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        parts = []
+        for block in content:
+            if isinstance(block, str):
+                parts.append(block)
+            elif isinstance(block, dict):
+                parts.append(block.get("text", ""))
+        return " ".join(parts)
+    return str(content)
 
 
 class Conversation:
@@ -101,16 +125,57 @@ class ConversationManager:
             "messages": self.conversation_history[thread_id].get_history()
         }
 
-    def update_thread_name(self, thread_id: str, name: str) -> None:
+    async def generate_thread_name(self, user_message: Any, ai_message: Any) -> str:
+        """
+        Use the LLM to generate a concise thread name from the opening exchange.
+
+        Args:
+            user_message: The first user message (str or list of content blocks).
+            ai_message: The first AI response (str or list of content blocks).
+
+        Returns:
+            A short thread name (max 6 words), or "New Conversation" on failure.
+        """
+        from llm_utils import get_llm
+        try:
+            user_text = _extract_text(user_message)
+            ai_text = _extract_text(ai_message)
+            prompt = (
+                "Generate a concise thread title (maximum 6 words, no punctuation at the end) "
+                "that summarises the following conversation opening.\n\n"
+                f"User: {user_text[:300]}\n"
+                f"Assistant: {ai_text[:300]}\n\n"
+                "Reply with ONLY the title — no quotes, no explanation."
+            )
+            llm = get_llm()
+            response = llm.invoke([SystemMessage(content=prompt)])
+            name = _extract_text(response.content).strip('"').strip("'").split("\n")[0][:80]
+            if not name:
+                return "New Conversation"
+            logger.info(f"Generated thread name: {name!r}")
+            return name
+        except Exception as exc:
+            logger.error(f"generate_thread_name error: {exc}")
+            return "New Conversation"
+
+    async def update_thread_name(self, thread_id: str, new_name: str) -> bool:
         """
         Update the name of a conversation thread.
 
         Args:
             thread_id (str): The thread identifier.
-            name (str): The new thread name.
+            new_name (str): The new thread name.
+
+        Returns:
+            bool: True if the update succeeded, False if the thread was not found.
         """
         if thread_id in self.conversation_history:
-            self.conversation_history[thread_id].thread_name = name
+            self.conversation_history[thread_id].thread_name = new_name
+            self.conversation_history[thread_id].update_hash()
+            logger.info(f"Thread name updated | thread_id={thread_id} | name={new_name!r}")
+            return True
+        logger.warning(f"update_thread_name: thread_id {thread_id!r} not found in conversation history")
+        return False
 
     def add_message(self, thread_id: str, data: Dict[str, Any]) -> None:
         """
